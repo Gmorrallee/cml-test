@@ -3,6 +3,11 @@ variable "location" {
   default = "uksouth"
 }
 
+variable "location_2" {
+  type    = string
+  default = "ukwest"
+}
+
 variable "subscriptions" {
   description = "Subscription IDs by purpose"
   type = object({
