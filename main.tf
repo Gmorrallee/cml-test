@@ -1,6 +1,6 @@
 module "rg" {
   source  = "Azure/avm-res-resources-resourcegroup/azurerm"
-  version = "~> 0.4"
+  version = "~> 0.2.2.2"
 
   name     = "rg-identity-prod"
   location = var.location
