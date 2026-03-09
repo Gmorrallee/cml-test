@@ -17,12 +17,11 @@ provider "azurerm" {
   subscription_id = var.subscriptions["identity"]
 }
 
-provider "azurerm" {
-  alias           = "identity"
-  features        {}
+provider "azapi" {
   use_oidc        = true
   subscription_id = var.subscriptions["identity"]
 }
+
 provider "azurerm" {
   alias           = "management"
   features        {}
