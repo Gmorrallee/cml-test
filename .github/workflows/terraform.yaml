@@ -38,16 +38,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           allow-no-subscriptions: true
 
-          
-- name: Debug - show subscription vars
-  run: |
-    echo "IDENTITY=${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}"
-    echo "MGMT=${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}"
-    echo "CONN=${{ vars.AZURE_SUBSCRIPTION_ID_CONNECTIVITY }}"
-    echo "TF_VAR_subscriptions=$TF_VAR_subscriptions"
-    echo "ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_I
-
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
