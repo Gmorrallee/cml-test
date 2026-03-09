@@ -18,6 +18,7 @@ provider "azurerm" {
   subscription_id = var.subscriptions["connectivity"]
 }
 
+# ✅ REQUIRED because AVM VNet module internally uses azapi
 provider "azapi" {
   use_oidc        = true
   subscription_id = var.subscriptions["identity"]
