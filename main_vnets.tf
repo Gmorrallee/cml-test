@@ -4,7 +4,7 @@ module "vnet_identity_uksouth" {
   version = "~> 0.17"
 
   providers = {
-    azurerm = azurerm.identity
+    azurerm = azurerm
   }
 
   name          = "vnet-identity-uks"
@@ -18,29 +18,13 @@ module "vnet_identity_ukwest" {
   version = "~> 0.17"
 
   providers = {
-    azurerm = azurerm.identity
+    azurerm = azurerm
   }
 
   name          = "vnet-identity-ukw"
   parent_id     = azurerm_resource_group.rg_identity_networking.id
   location      = var.location_2
   address_space = ["10.200.0.0/16"]
-}
-
-# -----------------------------
-# VNet Peering (AVM submodule)
-# -----------------------------
-
-module "identity_vnet_peering" {
-  source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
-  version = "~> 0.17"
-
-  name                      = "vnet-identity-uksouth-to-vnet-identity-ukwest"
-  parent_id                 = module.vnet_identity_uksouth.resource_id
-  remote_virtual_network_id = module.vnet_identity_ukwest.resource_id
-
-  create_reverse_peering = true
-  reverse_name           = "vnet-identity-ukwest-to-vnet-identity-uksouth"
 }
 
 
