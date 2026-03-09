@@ -7,13 +7,4 @@ terraform {
 
     use_oidc = true
   }
-
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-    }
-    random = {
-      source = "hashicorp/random"
-    }
-  }
 }
