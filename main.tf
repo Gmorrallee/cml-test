@@ -1,23 +1,14 @@
-# Importing the Azure naming module to ensure resources have unique CAF compliant names.
-module "naming" {
-  source  = "Azure/naming/azurerm"
-  version = "0.4.2"
+resource "azurerm_resource_group" "identity" {
+  name     = "rg-identity-prod"
+  location = var.location
 }
 
-module "regions" {
-  source  = "Azure/regions/azurerm"
-  version = "0.8.2"
-}
+module "vnet" {
+  source  = "Azure/avm-res-network-virtualnetwork/azurerm"
+  version = "~> 0.17"
 
-# This allows us to randomize the region for the resource group.
-resource "random_integer" "region_index" {
-  max = length(module.regions.regions) - 1
-  min = 0
-}
-
-module "resource_group" {
-  source = "../../"
-
-  location = module.regions.regions[random_integer.region_index.result].name
-  name     = module.naming.resource_group.name_unique
+  name                = "vnet-identity"
+  resource_group_name = azurerm_resource_group.identity.name
+  location            = var.location
+  address_space       = ["10.10.0.0/16"]
 }
