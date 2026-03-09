@@ -35,12 +35,8 @@ module "identity_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
-  providers = {
-    azurerm = azurerm.identity
-  }
-
-  name                    = "vnet-identity-uksouth-to-vnet-identity-ukwest"
-  parent_id               = module.vnet_identity_uksouth.resource_id
+  name                      = "vnet-identity-uksouth-to-vnet-identity-ukwest"
+  parent_id                 = module.vnet_identity_uksouth.resource_id
   remote_virtual_network_id = module.vnet_identity_ukwest.resource_id
 
   allow_virtual_network_access = true
