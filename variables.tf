@@ -4,7 +4,7 @@ variable "location" {
 }
 
 
-variable "identity_subscription_id" {
+variable "subscriptions" {
   description = "Subscription ID for the identity subscription"
   type        = string
 }
