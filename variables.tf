@@ -3,10 +3,9 @@ variable "location" {
   default = "uksouth"
 }
 
-variable "subscriptions" {
-  type = object({
-    identity     = string
-    connectivity = string
-    management = string
-  })
+
+variable "identity_subscription_id" {
+  description = "Subscription ID for the identity subscription"
+  type        = string
 }
+
