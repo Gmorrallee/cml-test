@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+    azapi = {
+      source  = "Azure/azapi"
+      version = "~> 2.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
   use_oidc        = true
@@ -18,7 +31,7 @@ provider "azurerm" {
   subscription_id = var.subscriptions["connectivity"]
 }
 
-# ✅ REQUIRED because AVM VNet module internally uses azapi
+# 🔴 THIS IS THE BIT YOU ARE MISSING
 provider "azapi" {
   use_oidc        = true
   subscription_id = var.subscriptions["identity"]
