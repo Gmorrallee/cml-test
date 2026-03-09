@@ -39,7 +39,7 @@ module "vnet_management_uksouth" {
   }
 
   name          = "vnet-management-uks"
-  parent_id     = azurerm_resource_group.rg_menagement_networking.id
+  parent_id     = azurerm_resource_group.rg_management_networking.id
   location      = var.location
   address_space = ["10.101.0.0/16"]
 }
