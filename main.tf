@@ -13,9 +13,9 @@ module "vnet" {
     azurerm = azurerm.identity
   }
 
-  name        = "vnet-identity-uks"
-  parent_id  = azurerm_resource_group.rg_identity_networking.id
-  location   = var.location
+  name       = "vnet-identity-uks"
+  parent_id = azurerm_resource_group.rg_identity_networking.id
+  location  = var.location
 
   address_space = ["10.100.0.0/16"]
 }
