@@ -2,7 +2,7 @@ resource "azurerm_resource_group" "identity" {
   name     = "rg-identity-prod"
   location = var.location
   providers = {
-    azurerm = azurerm.identity
+    azurerm = var.identity_subscription_id
   }
 
 }
