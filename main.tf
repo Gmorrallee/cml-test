@@ -1,6 +1,10 @@
 resource "azurerm_resource_group" "identity" {
   name     = "rg-identity-prod"
   location = var.location
+  providers = {
+    azurerm = azurerm.identity
+  }
+
 }
 
 module "vnet" {
