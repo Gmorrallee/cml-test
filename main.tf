@@ -1,10 +1,3 @@
-resource "azurerm_resource_group" "rg_identity_networking" {
-  provider = azurerm.identity
-
-  name     = "rg-identity-networking"
-  location = var.location
-}
-
 module "vnet_identity_uksouth" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm"
   version = "~> 0.17"
