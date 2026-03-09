@@ -14,10 +14,9 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-  # Default subscription for the *initial* provider context (ok to leave as identity)
-  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}
+  # IMPORTANT: subscription hosting the Terraform state storage account
+  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}
 
-  # Pass a JSON string into Terraform as TF_VAR_subscriptions
   TF_VAR_subscriptions: |
     {
       "identity":     "${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}",
