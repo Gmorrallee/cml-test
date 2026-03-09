@@ -22,4 +22,3 @@ provider "azapi" {
   use_oidc        = true
   subscription_id = var.subscriptions["identity"]
 }
-``
