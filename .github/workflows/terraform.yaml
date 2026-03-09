@@ -14,15 +14,15 @@ env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-  # IMPORTANT: subscription hosting the Terraform state storage account
   ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}
 
   TF_VAR_subscriptions: |
     {
-      "identity":     "${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}",
+      "identity": "${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}",
       "connectivity": "${{ vars.AZURE_SUBSCRIPTION_ID_CONNECTIVITY }}",
-      "management":   "${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}"
+      "management": "${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}"
     }
+
 
 jobs:
   terraform:
