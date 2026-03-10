@@ -1,19 +1,9 @@
-############################################
-# Locals: build rules per NSG
-############################################
 locals {
-  # Destination CIDR for each subnet (first/only prefix)
   subnet_dest = {
     uks = one(module.snet-dirservices-uks.address_prefixes)
     ukw = one(module.snet-dirservices-ukw.address_prefixes)
   }
 
-  # Rule keys that should use destination "*"
-  dest_any_rules = toset([
-    "deny-all-any"
-  ])
-
-  # Base rules (no destination set here)
   nsg_rules_base = {
     "Bastion-Allow" = {
       name                    = "Bastion-Allow"
@@ -22,28 +12,27 @@ locals {
       priority                = 100
       protocol                = "Tcp"
 
-      source_address_prefixes = [
+      source_address_prefixes = toset([
         "10.102.250.0/24",
         "10.103.250.0/24"
-      ]
+      ])
       source_port_range       = "*"
 
-      destination_port_ranges = ["22", "3389"]
-      destination_address_prefix = "10.100.10.4"
+      destination_port_ranges = toset(["22", "3389"])
     }
 
     "DirServices-Allow" = {
-      name                    = "DirServices-Allow"
-      access                  = "Allow"
-      direction               = "Inbound"
-      priority                = 110
-      protocol                = "*"
-      source_address_prefix   = "VirtualNetwork"
-      source_port_range       = "*"
+      name                  = "DirServices-Allow"
+      access                = "Allow"
+      direction             = "Inbound"
+      priority              = 110
+      protocol              = "*"
 
-      destination_port_ranges = ["53", "445"]
-      # destination_address_prefix injected below
-    }
+      source_address_prefix = "VirtualNetwork"
+      source_port_range     = "*"
+      destination_port_ranges = toset(["53", "445"])
+
+      }
 
     "deny-all-any" = {
       name                   = "Deny-Any-All"
@@ -56,34 +45,69 @@ locals {
       source_port_range      = "*"
 
       destination_port_range = "*"
-      # destination_address_prefix injected below (and overridden to "*" via dest_any_rules)
     }
   }
 
-  # Rules for UKS NSG: default destination subnet CIDR, override "*" for selected rules
+  rule_overrides_uks = {
+    # keep deny catch-all as * destination in UKS
+    "deny-all-any" = {
+      destination_address_prefix = "*"
+    }
+
+    "DirServices-Allow" = {
+      destination_address_prefixes = toset([
+        "10.100.10.4"
+      ])
+    }
+  }
+
+  rule_overrides_ukw = {
+    "deny-all-any" = {
+      destination_address_prefix = "*"
+    }
+
+     "DirServices-Allow" = {
+      destination_address_prefixes = toset([
+        "10.200.10.4"
+      ])
+    }
+  }
+
   nsg_rules_dirservices_uks = {
     for k, v in local.nsg_rules_base :
     k => merge(
       v,
-      { destination_address_prefix = local.subnet_dest.uks },
-      contains(local.dest_any_rules, k) ? { destination_address_prefix = "*" } : {}
+      lookup(local.rule_overrides_uks, k, {}),
+
+      (
+        try(lookup(local.rule_overrides_uks, k, {}).destination_address_prefix, null) == null &&
+        try(lookup(local.rule_overrides_uks, k, {}).destination_address_prefixes, null) == null &&
+        try(v.destination_address_prefix, null) == null &&
+        try(v.destination_address_prefixes, null) == null
+      )
+      ? { destination_address_prefix = local.subnet_dest.uks }
+      : {}
     )
   }
 
-  # Rules for UKW NSG: default destination subnet CIDR, override "*" for selected rules
   nsg_rules_dirservices_ukw = {
     for k, v in local.nsg_rules_base :
     k => merge(
       v,
-      { destination_address_prefix = local.subnet_dest.ukw },
-      contains(local.dest_any_rules, k) ? { destination_address_prefix = "*" } : {}
+      lookup(local.rule_overrides_ukw, k, {}),
+
+      (
+        try(lookup(local.rule_overrides_ukw, k, {}).destination_address_prefix, null) == null &&
+        try(lookup(local.rule_overrides_ukw, k, {}).destination_address_prefixes, null) == null &&
+        try(v.destination_address_prefix, null) == null &&
+        try(v.destination_address_prefixes, null) == null
+      )
+      ? { destination_address_prefix = local.subnet_dest.ukw }
+      : {}
     )
   }
 }
 
-############################################
-# NSGs (AVM module)
-############################################
 module "nsg-dirservices-uks" {
   source              = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version             = "0.5.1"
@@ -113,9 +137,9 @@ resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-uk
   subnet_id = module.snet-dirservices-uks.resource_id
 
   network_security_group_id = try(
-    module.nsg-dirservices-uks.created_nsg_resource_id,
     module.nsg-dirservices-uks.resource_id,
-    module.nsg-dirservices-uks.id
+    module.nsg-dirservices-uks.id,
+    module.nsg-dirservices-uks.created_nsg_resource_id
   )
 }
 
@@ -123,8 +147,8 @@ resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-uk
   subnet_id = module.snet-dirservices-ukw.resource_id
 
   network_security_group_id = try(
-    module.nsg-dirservices-ukw.created_nsg_resource_id,
     module.nsg-dirservices-ukw.resource_id,
-    module.nsg-dirservices-ukw.id
+    module.nsg-dirservices-ukw.id,
+    module.nsg-dirservices-ukw.created_nsg_resource_id
   )
 }
