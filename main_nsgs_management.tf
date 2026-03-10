@@ -1,8 +1,8 @@
 locals {
   # Grab the single CIDR from each subnet module (address_prefixes is a list)
   subnet_dest_management = {
-    uks = one(module.snet-management-uks.address_prefixes)
-    ukw = one(module.snet-management-ukw.address_prefixes)
+    uks = one(module.snet-mgmt-management-uks.address_prefixes)
+    ukw = one(module.snet-mgmt-management-ukw.address_prefixes)
   }
 
   # Base rule set used for both regions
