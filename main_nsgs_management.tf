@@ -1,5 +1,5 @@
 locals {
-  subnet_dest = {
+  subnet_dest_management = {
     uks = one(module.snet-management-uks.address_prefixes)
     ukw = one(module.snet-management-ukw.address_prefixes)
   }
@@ -58,7 +58,7 @@ locals {
         try(v.destination_address_prefix, null) == null &&
         try(v.destination_address_prefixes, null) == null
       )
-      ? { destination_address_prefix = local.subnet_dest.uks }
+      ? { destination_address_prefix = local.subnet_dest_management.uks }
       : {}
     )
   }
@@ -75,7 +75,7 @@ locals {
         try(v.destination_address_prefix, null) == null &&
         try(v.destination_address_prefixes, null) == null
       )
-      ? { destination_address_prefix = local.subnet_dest.ukw }
+      ? { destination_address_prefix = local.subnet_dest_management.ukw }
       : {}
     )
   }
