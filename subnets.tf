@@ -1,4 +1,4 @@
-module "snet_dirservices-uks" {
+module "snet-dirservices-uks" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
@@ -8,7 +8,7 @@ module "snet_dirservices-uks" {
   address_prefixes = ["10.100.10.0/24"]
 }
 
-module "snet_dirservices-ukw" {
+module "snet-dirservices-ukw" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
@@ -18,7 +18,7 @@ module "snet_dirservices-ukw" {
   address_prefixes = ["10.200.10.0/24"]
 }
 
-module "snet_bastion-uks" {
+module "snet-bastion-uks" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
@@ -28,7 +28,7 @@ module "snet_bastion-uks" {
   address_prefixes = ["10.102.250.0/24"]
 }
 
-module "snet_bastion-ukW" {
+module "snet-bastion-ukW" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
