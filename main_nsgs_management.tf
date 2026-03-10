@@ -93,7 +93,7 @@ module "nsg_management_uks" {
   version             = "0.5.1"
   
   providers = {
-    azurerm = azurerm.mgmt
+    azurerm = azurerm.management
   }
 
   location            = var.location
@@ -108,7 +108,7 @@ module "nsg_management_ukw" {
   version             = "0.5.1"
   
   providers = {
-    azurerm = azurerm.mgmt
+    azurerm = azurerm.management
   }
 
   location            = var.location_2
