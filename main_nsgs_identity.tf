@@ -4,7 +4,7 @@ locals {
       name                       = "Bastion-Allow"
       access                     = "Allow"
       destination_address_prefix = "*"
-      destination_port_range     = "22,3389"
+      destination_port_range     = "3389"
       direction                  = "Inbound"
       priority                   = 100
       protocol                   = "Tcp"
