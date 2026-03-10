@@ -5,9 +5,8 @@ locals {
     ukw = one(module.snet-dirservices-ukw.address_prefixes)
 
   dest_any_rules = toset([
-    "deny-all-any",   
-  ]
-
+    "deny-all-any"   
+  ])
   }
 
   # 2) Base rule template (no destination set here)
