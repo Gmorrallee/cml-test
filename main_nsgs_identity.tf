@@ -38,7 +38,7 @@ locals {
       direction               = "Inbound"
       priority                = 110
       protocol                = "*"
-      source_address_prefix   ""VirtualNetwork"
+      source_address_prefix   "VirtualNetwork"
       source_port_range       = "*"
 
       destination_port_ranges = ["53", "445"]
