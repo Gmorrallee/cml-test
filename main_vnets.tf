@@ -14,13 +14,14 @@ module "vnet_identity_uksouth" {
   address_space = ["10.100.0.0/16"]
 }
 
-
-module "subnet_identity_dirservices_uks" {
+module "identity_subnet" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
+
   name                 = "snet-dirservices-uks"
-  resource_group_name  = azurerm_resource_group.rg_identity_networking.name
-  virtual_network_name = module.vnet-identity-uks.name
+  resource_group_name  = data.azurerm_virtual_network.existing.resource_group_name
+  virtual_network_name = data.azurerm_virtual_network.existing.name
+
   address_prefixes = ["10.100.10.0/24"]
 }
 
