@@ -29,7 +29,7 @@ locals {
       source_port_range       = "*"
 
       destination_port_ranges = ["22", "3389"]
-      # destination_address_prefix injected below
+      destination_address_prefix = "10.100.10.4"
     }
 
     "DirServices-Allow" = {
