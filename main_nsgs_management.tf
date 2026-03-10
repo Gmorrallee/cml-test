@@ -114,7 +114,7 @@ module "nsg_management_ukw" {
 # Associate NSGs to subnets
 ############################################
 resource "azurerm_subnet_network_security_group_association" "nsg_management_uks" {
-  subnet_id = module.snet-management-uks.resource_id
+  subnet_id = module.snet-mgmt-management-uks.resource_id
 
   network_security_group_id = try(
     module.nsg_management_uks.resource_id,
@@ -124,7 +124,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg_management_uks
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_management_ukw" {
-  subnet_id = module.snet-management-ukw.resource_id
+  subnet_id = module.snet-mgmt-management-ukw.resource_id
 
   network_security_group_id = try(
     module.nsg_management_ukw.resource_id,
