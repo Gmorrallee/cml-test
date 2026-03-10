@@ -16,6 +16,8 @@ env:
 
   ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID_MANAGEMENT }}
 
+  TF_VAR_subnets: ${{ vars.TF_IDENTITY_SUBNETS }}
+
   TF_VAR_subscriptions: |
     {
       "identity": "${{ vars.AZURE_SUBSCRIPTION_ID_IDENTITY }}",
