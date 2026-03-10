@@ -35,13 +35,13 @@ locals {
     }
   }
 
-  rule_overrides_uks = {
+  rule_overrides_management_uks = {
     # keep deny catch-all as * destination in UKS
     "deny-all-any" = {
       destination_address_prefix = "*"
     }
 
-  rule_overrides_ukw = {
+  rule_overrides_management_ukw = {
     "deny-all-any" = {
       destination_address_prefix = "*"
     }
@@ -50,11 +50,11 @@ locals {
     for k, v in local.nsg_rules_base :
     k => merge(
       v,
-      lookup(local.rule_overrides_uks, k, {}),
+      lookup(local.rule_management_overrides_uks, k, {}),
 
       (
-        try(lookup(local.rule_overrides_uks, k, {}).destination_address_prefix, null) == null &&
-        try(lookup(local.rule_overrides_uks, k, {}).destination_address_prefixes, null) == null &&
+        try(lookup(local.rule_overrides_management_uks, k, {}).destination_address_prefix, null) == null &&
+        try(lookup(local.rule_overrides_management_uks, k, {}).destination_address_prefixes, null) == null &&
         try(v.destination_address_prefix, null) == null &&
         try(v.destination_address_prefixes, null) == null
       )
@@ -67,11 +67,11 @@ locals {
     for k, v in local.nsg_rules_base :
     k => merge(
       v,
-      lookup(local.rule_overrides_ukw, k, {}),
+      lookup(local.rule_management_overrides_ukw, k, {}),
 
       (
-        try(lookup(local.rule_overrides_ukw, k, {}).destination_address_prefix, null) == null &&
-        try(lookup(local.rule_overrides_ukw, k, {}).destination_address_prefixes, null) == null &&
+        try(lookup(local.rule_management_overrides_ukw, k, {}).destination_address_prefix, null) == null &&
+        try(lookup(local.rule_overridesmanagement__ukw, k, {}).destination_address_prefixes, null) == null &&
         try(v.destination_address_prefix, null) == null &&
         try(v.destination_address_prefixes, null) == null
       )
