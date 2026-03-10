@@ -10,7 +10,10 @@ locals {
         "10.102.250.0/24",
         "10.103.250.0/24"
       ]
-      source_port_range          = "*"
+      source_port_ranges          = [
+        "22",
+        "3389"
+]
 
       destination_address_prefix = "*"
       destination_port_range     = "3389"
