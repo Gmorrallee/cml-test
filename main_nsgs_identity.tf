@@ -11,11 +11,11 @@ locals {
       source_address_prefix      = "10.102.250.0/24"
       source_port_range          = "*"
     }
-    "rule02" = {
+    "deny-all-any" = {
       name                       = "Deny-Any-All"
       access                     = "Deny"
       destination_address_prefix = "*"
-      destination_port_ranges    = "*"
+      destination_port_ranges    = ["*"]
       direction                  = "Inbound"
       priority                   = 4000
       protocol                   = "*"
