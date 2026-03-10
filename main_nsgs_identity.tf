@@ -17,7 +17,7 @@ module "nsg-dirservices-ukw" {
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version = "0.5.1"
 
-  location            = var.location
+  location            = var.location_2
   name                = "nsg-dirservices-ukw"
   resource_group_name = azurerm_resource_group.rg_identity_networking.name
 }
