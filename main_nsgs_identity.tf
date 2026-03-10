@@ -8,7 +8,7 @@ module "nsg-dirservices-uks" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-uks" {
-  subnet_id                 = data.azurerm_subnet.snet-dirservices-uks.id
+  subnet_id                 = module.snet-dirservices-uks.resource_id
   network_security_group_id = module.nsg-dirservices-uks.resource_id
 }
 
@@ -23,7 +23,7 @@ module "nsg-dirservices-ukw" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-ukw" {
-  subnet_id                 = data.azurerm_subnet.snet-dirservices-ukw.id
+  subnet_id                 = module.snet-dirservices-ukW.resource_id
   network_security_group_id = module.nsg-dirservices-uks.resource_id
 }
 
