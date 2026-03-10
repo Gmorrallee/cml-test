@@ -32,6 +32,19 @@ locals {
       # destination_address_prefix injected below
     }
 
+    "DirServices-Allow" = {
+      name                    = "DirServices-Allow"
+      access                  = "Allow"
+      direction               = "Inbound"
+      priority                = 110
+      protocol                = "*"
+      source_address_prefix   ""VirtualNetwork"
+      source_port_range       = "*"
+
+      destination_port_ranges = ["53", "445"]
+      # destination_address_prefix injected below
+    }
+
     "deny-all-any" = {
       name                   = "Deny-Any-All"
       access                 = "Deny"
