@@ -4,7 +4,7 @@ module "snet_dirservices-uks" {
 
   parent_id = module.vnet_identity_uksouth.resource_id
   name      = "snet-dirservices-uks"
-  address_prefixes = each.value.address_prefixes
+  address_prefixes = var.subnets["dirservices"].address_prefixes
 
 }
 
@@ -14,6 +14,6 @@ module "snet_dirservices-ukw" {
 
   parent_id = module.vnet_identity_ukwest.resource_id
   name      = "snet-dirservices-ukw"
-  address_prefixes = each.value.address_prefixes
+  address_prefixes = var.subnets["dirservices"].address_prefixes
 
 }
