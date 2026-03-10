@@ -4,7 +4,7 @@ locals {
     ukw = one(module.snet-management-ukw.address_prefixes)
   }
 
-  nsg_rules_base = {
+  nsg_rules_base_management = {
     "Bastion-Allow" = {
       name                    = "Bastion-Allow"
       access                  = "Allow"
@@ -47,7 +47,7 @@ locals {
     }
 
   nsg_rules_management_uks = {
-    for k, v in local.nsg_rules_base :
+    for k, v in local.nsg_rules_basemanagement :
     k => merge(
       v,
       lookup(local.rule_management_overrides_uks, k, {}),
@@ -64,7 +64,7 @@ locals {
   }
 
   nsg_rules_management_ukw = {
-    for k, v in local.nsg_rules_base :
+    for k, v in local.nsg_rules_basemanagement :
     k => merge(
       v,
       lookup(local.rule_management_overrides_ukw, k, {}),
