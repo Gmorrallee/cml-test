@@ -15,7 +15,7 @@ locals {
       name                       = "Deny-Any-All"
       access                     = "Deny"
       destination_address_prefix = "*"
-      destination_port_ranges    = ["*"]
+      destination_port_ranges    = "*"
       direction                  = "Inbound"
       priority                   = 4000
       protocol                   = "*"
