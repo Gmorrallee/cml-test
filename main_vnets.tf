@@ -18,12 +18,12 @@ module "identity_subnet" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
-  name                 = "snet-dirservices-uks"
-  resource_group_name  = data.azurerm_virtual_network.existing.resource_group_name
-  virtual_network_name = data.azurerm_virtual_network.existing.name
+  name      = "snet-dirservices-uks"
+  parent_id = module.vnet_identity_uksouth.id
 
   address_prefixes = ["10.100.10.0/24"]
 }
+
 
 
 module "vnet_identity_ukwest" {
