@@ -17,4 +17,11 @@ variable "subscriptions" {
   })
 }
 
+variable "subnets" {
+  type = map(object({
+    address_prefixes = list(string)
+    enabled          = bool
+  }))
+}
+
 
