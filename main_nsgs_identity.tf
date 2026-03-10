@@ -3,6 +3,11 @@ locals {
   subnet_dest = {
     uks = one(module.snet-dirservices-uks.address_prefixes)  # or module.snet-dirservices-uks.address_prefix
     ukw = one(module.snet-dirservices-ukw.address_prefixes)
+
+  dest_any_rules = toset([
+    "deny-all-any",   
+  ]
+
   }
 
   # 2) Base rule template (no destination set here)
@@ -30,15 +35,25 @@ locals {
   }
 
   # 3) Derive per-NSG rules by injecting destination_address_prefix
-  nsg_rules_dirservices_uks = {
+
+nsg_rules_dirservices_uks = {
     for k, v in local.nsg_rules_base :
-    k => merge(v, { destination_address_prefix = local.subnet_dest.uks })
+    k => merge(
+      v,
+      { destination_address_prefix = local.subnet_dest.uks },
+      contains(local.dest_any_rules, k) ? { destination_address_prefix = "*" } : {}
+    )
   }
 
   nsg_rules_dirservices_ukw = {
     for k, v in local.nsg_rules_base :
-    k => merge(v, { destination_address_prefix = local.subnet_dest.ukw })
+    k => merge(
+      v,
+      { destination_address_prefix = local.subnet_dest.ukw },
+      contains(local.dest_any_rules, k) ? { destination_address_prefix = "*" } : {}
+    )
   }
+
 }
 
 module "nsg-dirservices-uks" {
