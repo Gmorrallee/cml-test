@@ -3,9 +3,9 @@ module "snet_dirservices-uks" {
   version = "~> 0.17"
 
   parent_id = module.vnet_identity_uksouth.resource_id
-  name      = "snet-dirservices-uks"
+  name      = "snet-${each.key}-uks"
+  address_prefixes = each.value.address_prefixes
 
-  address_prefixes = ["10.100.10.0/24"]
 }
 
 module "snet_dirservices-ukw" {
@@ -13,7 +13,7 @@ module "snet_dirservices-ukw" {
   version = "~> 0.17"
 
   parent_id = module.vnet_identity_ukwest.resource_id
-  name      = "snet-dirservices-ukw"
+  name      = "snet-${each.key}-ukW"
+  address_prefixes = each.value.address_prefixes
 
-  address_prefixes = ["10.200.10.0/24"]
 }
