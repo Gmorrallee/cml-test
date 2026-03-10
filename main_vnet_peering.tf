@@ -1,4 +1,4 @@
-module "identity_vnet_peering" {
+module "identity_uks_to_ukwest_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
@@ -15,7 +15,7 @@ module "identity_vnet_peering" {
   reverse_name           = "vnet-identity-ukwest-to-vnet-identity-uksouth"
 }
 
-module "identity_to_connectivity_vnet_peering" {
+module "identity_uks_to_connectivity_uks_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
@@ -32,7 +32,7 @@ module "identity_to_connectivity_vnet_peering" {
   reverse_name           = "vnet-connectivity-uksouth-to-vnet-identity-uksouth"
 }
 
-module "identity_to_connectivity_vnet_ukwest_peering" {
+module "identity_uks_to_connectivity_ukwest_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
@@ -49,7 +49,41 @@ module "identity_to_connectivity_vnet_ukwest_peering" {
   reverse_name           = "vnet-connectivity-ukwest-to-vnet-identity-uksouth"
 }
 
-module "management_vnet_peering" {
+module "identity_uks_to_management_uks_vnet_peering" {
+  source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
+  version = "~> 0.17"
+
+  name                      = "vnet-identity-uksouth-to-vnet-management-uksouth"
+  parent_id                 = module.vnet_identity_uksouth.resource_id
+  remote_virtual_network_id = module.vnet_management_uksouth.resource_id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = false
+  use_remote_gateways          = false
+
+  create_reverse_peering = true
+  reverse_name           = "vnet-management-uksouth-to-vnet-identity-uksouth"
+}
+
+module "identity_uks_to_management_ukwest_vnet_peering" {
+  source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
+  version = "~> 0.17"
+
+  name                      = "vnet-identity-uksouth-to-vnet-management-ukwest"
+  parent_id                 = module.vnet_identity_uksouth.resource_id
+  remote_virtual_network_id = module.vnet_management_ukwest.resource_id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = false
+  use_remote_gateways          = false
+
+  create_reverse_peering = true
+  reverse_name           = "vnet-management-ukwest-to-vnet-identity-uksouth"
+}
+
+module "management_uks_to_ukwest_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
@@ -66,7 +100,7 @@ module "management_vnet_peering" {
   reverse_name           = "vnet-management-ukwest-to-vnet-management-uksouth"
 }
 
-module "connectivity_vnet_peering" {
+module "connectivity_uks_to_ukwest_vnet_peering" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/peering"
   version = "~> 0.17"
 
