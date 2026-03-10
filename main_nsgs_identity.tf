@@ -7,7 +7,7 @@ locals {
       priority                   = 100
       protocol                   = "Tcp"
 
-      source_address_prefix      = "10.102.250.0/24"
+      source_address_prefixes      = "10.102.250.0/24,10.103.250.0/24"
       source_port_range          = "*"
 
       destination_address_prefix = "*"
