@@ -91,7 +91,7 @@ locals {
 module "nsg_management_uks" {
   source              = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version             = "0.5.1"
-  providers = { azurerm = azurerm.mgmt } 
+  providers           = azurerm.mgmt 
   location            = var.location
   name                = "nsg-management-uks"
   resource_group_name = azurerm_resource_group.rg_management_networking.name
@@ -102,7 +102,7 @@ module "nsg_management_uks" {
 module "nsg_management_ukw" {
   source              = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version             = "0.5.1"
-  providers = { azurerm = azurerm.mgmt } 
+  providers           = azurerm.mgmt 
   location            = var.location_2
   name                = "nsg-management-ukw"
   resource_group_name = azurerm_resource_group.rg_management_networking.name
