@@ -97,13 +97,23 @@ module "nsg-dirservices-ukw" {
 # Associate NSGs to subnets
 ############################################
 resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-uks" {
-  subnet_id                 = module.snet-dirservices-uks.resource_id
-  network_security_group_id = module.nsg-dirservices-uks.created_nsg_resource_id
+  subnet_id = module.snet-dirservices-uks.resource_id
+
+  network_security_group_id = try(
+    module.nsg-dirservices-uks.created_nsg_resource_id,
+    module.nsg-dirservices-uks.resource_id,
+    module.nsg-dirservices-uks.id
+  )
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg-dirservices-ukw" {
-  subnet_id                 = module.snet-dirservices-ukw.resource_id
-  network_security_group_id = module.nsg-dirservices-ukw.created_nsg_resource_id
+  subnet_id = module.snet-dirservices-ukw.resource_id
+
+  network_security_group_id = try(
+    module.nsg-dirservices-ukw.created_nsg_resource_id,
+    module.nsg-dirservices-ukw.resource_id,
+    module.nsg-dirservices-ukw.id
+  )
 }
 
 
