@@ -3,27 +3,32 @@ locals {
     "Bastion-Allow" = {
       name                       = "Bastion-Allow"
       access                     = "Allow"
-      destination_address_prefix = "*"
-      destination_port_range     = "3389"
       direction                  = "Inbound"
       priority                   = 100
       protocol                   = "Tcp"
+
       source_address_prefix      = "10.102.250.0/24"
       source_port_range          = "*"
+
+      destination_address_prefix = "*"
+      destination_port_range     = "3389"
     }
+
     "deny-all-any" = {
       name                       = "Deny-Any-All"
       access                     = "Deny"
-      destination_address_prefix = "*"
-      destination_port_ranges    = ["*"]
       direction                  = "Inbound"
       priority                   = 4000
       protocol                   = "*"
+
       source_address_prefix      = "*"
       source_port_range          = "*"
+      destination_address_prefix = "*"
+      destination_port_range     = "*"
     }
   }
 }
+
 
 module "nsg-dirservices-uks" {
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
