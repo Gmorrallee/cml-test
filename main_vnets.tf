@@ -12,14 +12,17 @@ module "vnet_identity_uksouth" {
   parent_id     = azurerm_resource_group.rg_identity_networking.id
   location      = var.location
   address_space = ["10.100.0.0/16"]
-
-  subnets {
-    identity = {
-      name             = "snet-dirservices-uks"
-      address_prefixes = ["10.100.10.0/23"]
-    }
-  } 
 }
+
+
+module "subnet_identity_dirservices_uks" {
+  source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
+  version = "~> 0.17"
+  name                 = "snet-dirservices-uks"
+  virtual_network_name = module.vnet-identity-uks.name
+  address_prefixes = ["10.100.10.0/24"]
+}
+
 
 module "vnet_identity_ukwest" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm"
