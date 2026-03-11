@@ -45,7 +45,7 @@ module "snet-gateway-ukw" {
   parent_id = module.vnet_connectivity_ukwest.resource_id
   name      = "GatewaySubnet"
 
-  address_prefixes = ["10.102.251.0/24"]
+  address_prefixes = ["10.202.251.0/24"]
 }
 
 module "snet-firewall-ukw" {
