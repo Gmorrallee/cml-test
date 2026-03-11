@@ -2,6 +2,10 @@ module "rt_mgmt_management_uks" {
   source  = "Azure/avm-res-network-routetable/azurerm"
   version = "0.5.0"
 
+  providers = {
+    azurerm = azurerm.management
+  }
+
   name                = "rt-mgmt-management-uks"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg_management_networking.name
@@ -21,6 +25,10 @@ routes = {
 module "rt_mgmt_management_ukw" {
   source  = "Azure/avm-res-network-routetable/azurerm"
   version = "0.5.0"
+
+  providers = {
+    azurerm = azurerm.management
+  }
 
   name                = "rt-mgmt-management-ukw"
   location            = var.location_2
