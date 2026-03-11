@@ -12,7 +12,7 @@ module "vm_dc_uks" {
   account_credentials = {
     admin_credentials = {
       username                           = "localadmin"
-      password                           = random_password.vm_admin.result
+      password                           = "Banana45"
       generate_admin_password_or_ssh_key = false
     }
   }
@@ -23,7 +23,7 @@ module "vm_dc_uks" {
       ip_configurations = {
         primary = {
           name                          = "ipconfig1"
-          private_ip_subnet_resource_id = module.snet_idy_dirservices_uks.resource_id
+          private_ip_subnet_resource_id = module.snet_dirservices_uks.resource_id
         }
       }
     }
