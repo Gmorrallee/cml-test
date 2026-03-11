@@ -19,9 +19,9 @@ routes = {
     next_hop_in_ip_address    = var.firewall_ip_uks
   }
 }
-  subnet_resource_ids = {
-    mgmt = module.snet_mgmt_management_uks.resource_id
-  }
+#  subnet_resource_ids = {
+#    mgmt = module.snet_mgmt_management_uks.resource_id
+#  }
 
 }
 
@@ -48,8 +48,8 @@ routes = {
   }
 }
 
-  subnet_resource_ids = {
-    mgmt = module.snet_mgmt_management_ukw.resource_id
-  }
+#  subnet_resource_ids = {
+#    mgmt = module.snet_mgmt_management_ukw.resource_id
+#  }
 
 }
