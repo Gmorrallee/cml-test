@@ -28,7 +28,7 @@ module "snet-firewall-uks" {
   address_prefixes = ["10.102.252.0/24"]
 }
 
-module "snet-bastion-ukW" {
+module "snet-bastion-ukw" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
