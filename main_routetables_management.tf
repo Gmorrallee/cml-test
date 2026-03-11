@@ -6,13 +6,15 @@ module "rt_mgmt_management_uks" {
   location            = var.location
   resource_group_name = azurerm_resource_group.rg_management_networking.name
 
-  routes = {
-    default-to-fw = {
-      address_prefix = "0.0.0.0/0"
-      next_hop_type  = "VirtualAppliance"
-      next_hop_ip    = var.firewall_ip_uks
-    }
+
+routes = {
+  internet = {
+    name           = "Internet"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "VirtualAppliance"
+    next_hop_ip    = var.firewall_ip_uks
   }
+}
 }
 
 
@@ -24,11 +26,15 @@ module "rt_mgmt_management_ukw" {
   location            = var.location_2
   resource_group_name = azurerm_resource_group.rg_management_networking.name
 
-  routes = {
-    default-to-fw = {
-      address_prefix = "0.0.0.0/0"
-      next_hop_type  = "VirtualAppliance"
-      next_hop_ip    = var.firewall_ip_ukw
-    }
+
+routes = {
+  internet = {
+    name           = "Internet"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "VirtualAppliance"
+    next_hop_ip    = var.firewall_ip_uks
+  }
+}
+}
   }
 }
