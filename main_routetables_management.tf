@@ -20,7 +20,7 @@ routes = {
   }
 }
   subnet_resource_ids = {
-    mgmt = module.snet_mgmt_management_uks.resource_id
+    mgmt = module.snet_management_uks.resource_id
   }
 
 }
@@ -49,7 +49,7 @@ routes = {
 }
 
   subnet_resource_ids = {
-    mgmt = module.snet_mgmt_management_ukw.resource_id
+    mgmt = module.snet_management_ukw.resource_id
   }
 
 }
