@@ -23,7 +23,7 @@ module "snet-firewall-uks" {
   version = "~> 0.17"
 
   parent_id = module.vnet_connectivity_uksouth.resource_id
-  name      = "GatewaySubnet"
+  name      = "AzureFirewallSubnet"
 
   address_prefixes = ["10.102.252.0/24"]
 }
@@ -53,7 +53,7 @@ module "snet-firewall-ukw" {
   version = "~> 0.17"
 
   parent_id = module.vnet_connectivity_ukwest.resource_id
-  name      = "GatewaySubnet"
+  name      = "AzureFirewallSubnet"
 
   address_prefixes = ["10.202.252.0/24"]
 }
