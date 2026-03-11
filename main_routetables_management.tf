@@ -20,7 +20,7 @@ routes = {
   }
 }
   subnet_resource_ids = {
-    mgmt = module["snet-mgmt-management-uks"].resource_id
+    mgmt = module.snet_mgmt_management_uks.resource_id
   }
 
 }
