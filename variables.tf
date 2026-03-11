@@ -18,4 +18,16 @@ variable "subscriptions" {
 }
 
 
+variable "firewall_ip_uks" {
+  description = "Private IP address of the Azure Firewall in UK South"
+  type        = string
+}
+
+variable "firewall_ip_ukw" {
+  description = "Private IP address of the Azure Firewall in UK West"
+  type        = string
+}
+
+
+
 
