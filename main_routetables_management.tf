@@ -1,17 +1,34 @@
-module "rt-mgmt-management-uks" {
+module "rt_mgmt_management_uks" {
   source  = "Azure/avm-res-network-routetable/azurerm"
   version = "0.5.0"
 
-location = var.location
-name = "rt-mgmt-management-uks"
+  name                = "rt-mgmt-management-uks"
+  location            = var.location
   resource_group_name = azurerm_resource_group.rg_management_networking.name
+
+  routes = {
+    default-to-fw = {
+      address_prefix = "0.0.0.0/0"
+      next_hop_type  = "VirtualAppliance"
+      next_hop_ip    = var.firewall_ip_uks
+    }
+  }
 }
 
-module "rt-mgmt-management-ukw" {
-  source  = "Azure/avm-res-network-routetable/azurerm//examples/complete-example"
+
+module "rt_mgmt_management_ukw" {
+  source  = "Azure/avm-res-network-routetable/azurerm"
   version = "0.5.0"
 
-location = var.location_2
-name = "rt-mgmt-management-ukw"
+  name                = "rt-mgmt-management-ukw"
+  location            = var.location_2
   resource_group_name = azurerm_resource_group.rg_management_networking.name
+
+  routes = {
+    default-to-fw = {
+      address_prefix = "0.0.0.0/0"
+      next_hop_type  = "VirtualAppliance"
+      next_hop_ip    = var.firewall_ip_ukw
+    }
+  }
 }
