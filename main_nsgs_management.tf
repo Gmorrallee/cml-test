@@ -1,8 +1,8 @@
 locals {
   # Grab the single CIDR from each subnet module (address_prefixes is a list)
   subnet_dest_management = {
-    uks = one(module.snet-mgmt-management-uks.address_prefixes)
-    ukw = one(module.snet-mgmt-management-ukw.address_prefixes)
+    uks = one(module.snet_mgmt_management_uks.address_prefixes)
+    ukw = one(module.snet_mgmt_management_ukw.address_prefixes)
   }
 
   # Base rule set used for both regions
@@ -122,7 +122,7 @@ module "nsg_management_ukw" {
 # Associate NSGs to subnets
 ############################################
 resource "azurerm_subnet_network_security_group_association" "nsg_management_uks" {
-  subnet_id = module.snet-mgmt-management-uks.resource_id
+  subnet_id = module.snet_mgmt_management_uks.resource_id
 
   network_security_group_id = try(
     module.nsg_management_uks.resource_id,
@@ -132,7 +132,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg_management_uks
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_management_ukw" {
-  subnet_id = module.snet-mgmt-management-ukw.resource_id
+  subnet_id = module.snet_mgmt_management_ukw.resource_id
 
   network_security_group_id = try(
     module.nsg_management_ukw.resource_id,
