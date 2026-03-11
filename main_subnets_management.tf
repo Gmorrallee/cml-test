@@ -1,4 +1,4 @@
-Module "snet_mgmt_management_uks" {
+module "snet_mgmt_management_uks" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   version = "~> 0.17"
 
