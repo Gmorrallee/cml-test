@@ -57,5 +57,3 @@ module "vm_dc_uks" {
     disk_size_gb         = 128
   }
 }
-``
-
