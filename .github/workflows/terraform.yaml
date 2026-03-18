@@ -1,8 +1,21 @@
 name: Terraform Deploy
 
+
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Terraform action"
+        required: true
+        default: apply
+        type: choice
+        options:
+          - apply
+          - destroy
+
   pull_request:
 
 permissions:
